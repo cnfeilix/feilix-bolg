@@ -9,7 +9,9 @@
        http://www.springframework.org/schema/mvc   
        http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd">
 
-	<context:component-scan base-package="com.threetcloud.web.controller" />
+	<context:component-scan base-package="com.threetcloud.web.controller" >
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan>
 	
 	<mvc:annotation-driven />
 
@@ -49,7 +51,7 @@
         <property name="favorPathExtension" value="true"/>
 	</bean>
 	
-
+	<!-- 默认的jsp视图解析器 -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
 		<property name="contentType" value="text/html"/>   
@@ -57,6 +59,7 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 
+	<!-- 支持进度计算的文件上传解析器（自定义） -->
 	<!-- <bean id="multipartResolver" class="com.threetcloud.common.utils.ProgressTraceableMultipartResolver">
 		<property name="defaultEncoding" value="utf-8" />
 		<property name="maxUploadSize" value="20971520000" /> 20G
